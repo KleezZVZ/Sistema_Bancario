@@ -8,7 +8,7 @@ struct Clientes{
     int ci, saldo, numero_de_penalizaciones;
     string nombre, tipo_de_cuenta, suspension, numero_de_cuenta;
 };
-int flag=0, search_ci, deposito=0, search_numero_de_cuenta_2; 
+int flag=0, search_ci, deposito=0, retiro=0, search_numero_de_cuenta_2; 
 string search_numero_de_cuenta;
 int main(){
     Clientes cliente[2000]; 
@@ -106,7 +106,66 @@ int main(){
                             system("cls");
                         }
                     }if(cliente[search_ci].numero_de_penalizaciones>=3){
-                        cout<<"Debido a la gran de error cometido durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
+                        cout<<"Debido a la gran cantidad de errores cometidos durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
+                        cliente[search_ci].suspension="true";
+                        cliente[search_ci].numero_de_penalizaciones=0;
+                        system("pause");
+                        system("cls");
+                        }
+                    break;
+                    case 2:
+                    cout<<"Bienvenido a la seccion de retiro.\nPor favor ingrese el numero de su cedula de indentidad: "; cin>>search_ci;
+                    system("cls");
+                    rewind(stdin);
+                    cout<<"Ingrese el numero de cuenta de su tarjeta: "; getline(cin, search_numero_de_cuenta);
+                    system("cls");
+                    rewind(stdin);
+                    for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                        if(search_ci==cliente[i].ci){
+                            search_ci=i;
+                            break;
+                        }
+                    }for(int i=0; i<1000; i++){ 
+                        if(search_numero_de_cuenta==cliente[i].numero_de_cuenta){
+                            search_numero_de_cuenta_2=i;
+                            break;
+                        }
+                    }if(search_numero_de_cuenta_2!=search_ci){
+                        cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+                        system("pause");
+                        system("cls");
+                    }else if(cliente[search_ci].suspension=="true"){
+                        cout<<"Lo lamentamos "<<cliente[search_ci].nombre<<" pero su cuenta esta suspendida"<<endl;
+                        system("pause");
+                        system("cls");
+                    }else{
+                        cout<<"Bienvenido/a "<<cliente[search_ci].nombre<<"\nIngrese la cantidad a retirar: "; cin>>retiro;
+                        system("cls");
+                        if(retiro<=0){
+                            cout<<"I am a joke to you?"<<endl;
+                            cliente[search_ci].numero_de_penalizaciones++;
+                            system("pause");
+                            system("cls");
+                        }else if(retiro>cliente[search_ci].saldo){
+                            cout<<"No puede retirar una cantidad superior a su saldo. Por favor, depositele a su cuenta"<<endl;
+                            system("pause");
+                            system("cls");
+                        }else if(retiro>100000){
+                            cout<<"La politicas de nuestro banco no permite retiros mayores a 100.000$"<<endl;
+                            cliente[search_ci].numero_de_penalizaciones++;
+                            system("pause");
+                            system("cls");
+                        }else{
+                            cliente[search_ci].saldo-=retiro;
+                            cout<<"Su retiro ha sido realizado con exito!"<<endl;
+                            ofstream out_file("Operaciones.csv",ios_base::app);
+                            out_file<<cliente[search_ci].ci<<","<<cliente[search_ci].nombre<<","<<"retiro"<<","<<retiro<<","<<cliente[search_ci].tipo_de_cuenta<<endl;
+                            out_file.close();
+                            system("pause");
+                            system("cls");
+                        }
+                    }if(cliente[search_ci].numero_de_penalizaciones>=3){
+                        cout<<"Debido a la gran cantidad de errores cometidos durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
                         cliente[search_ci].suspension="true";
                         cliente[search_ci].numero_de_penalizaciones=0;
                         system("pause");
