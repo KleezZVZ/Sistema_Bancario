@@ -44,16 +44,19 @@ int main(){
                 system("cls");
                 for(int i=0; i<1000; i++){ //Razonamiento para usar linear search: Ya que solo se usara para buscar un cliente y no para filtrar en un cierto orden, no vi necesidad de implementar un sistema de ordenamiento para utilizar los otros metodos de busquedas, ya que se usaran en la seccion 2 de este programa.
                     if(search_ci==cliente[i].ci){
-                        search_ci=i;
+                        cout<<"El cliente es: "<<cliente[i].nombre<<endl;
+                        cout<<"El numero de cuenta es: "<<cliente[i].numero_de_cuenta<<endl;
+                        cout<<"El tipo de cuenta es: "<<cliente[i].tipo_de_cuenta<<endl;
+                        cout<<"El saldo de la cuenta es: "<<cliente[i].saldo<<endl;
+                        system("pause");
+                        system("cls");
                         break;
+                    }else if(search_ci!=cliente[i].ci && i==999){
+                        cout<<"La cedula que ingreso no es correcta, por favor vuelva a intentarlo"<<endl;
+                        system("pause");
+                        system("cls");
                     }
                 }
-                cout<<"El cliente es: "<<cliente[search_ci].nombre<<endl;
-                cout<<"El numero de cuenta es: "<<cliente[search_ci].numero_de_cuenta<<endl;
-                cout<<"El tipo de cuenta es: "<<cliente[search_ci].tipo_de_cuenta<<endl;
-                cout<<"El saldo de la cuenta es: "<<cliente[search_ci].saldo<<endl;
-                system("pause");
-                system("cls");
                 break;
             case 3:
             do{
@@ -66,6 +69,7 @@ int main(){
                     rewind(stdin);
                     cout<<"Ingrese el numero de cuenta de su tarjeta: "; getline(cin, search_numero_de_cuenta);
                     system("cls");
+                    rewind(stdin);
                     for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
                         if(search_ci==cliente[i].ci){
                             search_ci=i;
@@ -80,7 +84,7 @@ int main(){
                         cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
                         system("pause");
                         system("cls");
-                    }if(cliente[search_ci].suspension=="true"){
+                    }else if(cliente[search_ci].suspension=="true"){
                         cout<<"Lo lamentamos "<<cliente[search_ci].nombre<<" pero su cuenta esta suspendida"<<endl;
                         system("pause");
                         system("cls");
@@ -92,14 +96,23 @@ int main(){
                             cliente[search_ci].numero_de_penalizaciones++;
                             system("pause");
                             system("cls");
-
                         }else{
                             cliente[search_ci].saldo+=deposito;
                             cout<<"Su deposito ha sido realizado con exito!"<<endl;
+                            ofstream out_file("Operaciones.csv",ios_base::app);
+                            out_file<<cliente[search_ci].ci<<","<<cliente[search_ci].nombre<<","<<"deposito"<<","<<deposito<<","<<cliente[search_ci].tipo_de_cuenta<<endl;
+                            out_file.close();
                             system("pause");
                             system("cls");
                         }
-                    }
+                    }if(cliente[search_ci].numero_de_penalizaciones>=3){
+                        cout<<"Debido a la gran de error cometido durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
+                        cliente[search_ci].suspension="true";
+                        cliente[search_ci].numero_de_penalizaciones=0;
+                        system("pause");
+                        system("cls");
+                        }
+                    break;
                 }
             }while(flag!=4);
         }
