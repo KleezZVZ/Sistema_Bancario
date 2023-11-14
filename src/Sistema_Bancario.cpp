@@ -14,7 +14,7 @@ int main(){
     Clientes cliente[2000]; 
     string line, word;
     int count=0, nline=0;
-    ifstream in_file("clients.csv", ifstream::in);
+    ifstream in_file("../data/clients.csv", ifstream::in);
     if(!in_file.is_open()){
         cout<<"Archivo no encontrado";
         return 0;
@@ -55,7 +55,7 @@ int main(){
                         cout<<"Ingrese su numero de cuenta: "; getline(cin, search_numero_de_cuenta);
                         system("cls");
                         rewind(stdin);
-                        for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                        for(int i=0; i<1000; i++){ 
                             if(search_nombre==cliente[i].nombre){
                                 search_nombre_2=i;
                                 break;
@@ -88,7 +88,7 @@ int main(){
                         cout<<"Ingrese su numero de cuenta: "; getline(cin, search_numero_de_cuenta);
                         system("cls");
                         rewind(stdin);
-                        for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                        for(int i=0; i<1000; i++){ 
                             if(search_ci==cliente[i].ci){
                                 search_ci=i;
                                 break;
@@ -138,7 +138,7 @@ int main(){
                         cout<<"Ingrese el numero de cuenta de su tarjeta: "; getline(cin, search_numero_de_cuenta);
                         system("cls");
                         rewind(stdin);
-                        for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                        for(int i=0; i<1000; i++){ 
                             if(search_ci==cliente[i].ci){
                                 search_ci=i;
                                 break;
@@ -167,7 +167,7 @@ int main(){
                             }else{
                                 cliente[search_ci].saldo+=deposito;
                                 cout<<"Su deposito ha sido realizado con exito!"<<endl;
-                                ofstream out_file("Operaciones.csv",ios_base::app);
+                                ofstream out_file("../data/Operaciones.csv",ios_base::app);
                                 out_file<<cliente[search_ci].ci<<","<<cliente[search_ci].nombre<<","<<cliente[search_ci].tipo_de_cuenta<<","<<"deposito"<<","<<deposito<<endl;
                                 out_file.close();
                                 system("pause");
@@ -188,7 +188,7 @@ int main(){
                         cout<<"Ingrese el numero de cuenta de su tarjeta: "; getline(cin, search_numero_de_cuenta);
                         system("cls");
                         rewind(stdin);
-                        for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                        for(int i=0; i<1000; i++){ 
                             if(search_ci==cliente[i].ci){
                                 search_ci=i;
                                 break;
@@ -226,7 +226,7 @@ int main(){
                             }else{
                                 cliente[search_ci].saldo-=retiro;
                                 cout<<"Su retiro ha sido realizado con exito!"<<endl;
-                                ofstream out_file("Operaciones.csv",ios_base::app);
+                                ofstream out_file("../data/Operaciones.csv",ios_base::app);
                                 out_file<<cliente[search_ci].ci<<","<<cliente[search_ci].nombre<<","<<cliente[search_ci].tipo_de_cuenta<<","<<"retiro"<<","<<retiro<<endl;
                                 out_file.close();
                                 system("pause");
@@ -247,7 +247,7 @@ int main(){
                         cout<<"Ingrese el numero de cuenta de su tarjeta: "; getline(cin, search_numero_de_cuenta);
                         system("cls");
                         rewind(stdin);
-                        for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                        for(int i=0; i<1000; i++){ 
                             if(search_ci==cliente[i].ci){
                                 search_ci=i;
                                 break;
@@ -272,7 +272,7 @@ int main(){
                             cout<<"Ingrese el numero de cuenta de la tarjeta a transferir: "; getline(cin, search_numero_de_cuenta);
                             system("cls");
                             rewind(stdin);
-                            for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                            for(int i=0; i<1000; i++){ 
                                 if(search_ci_2==cliente[i].ci){
                                     search_ci_2=i;
                                     break;
@@ -310,7 +310,7 @@ int main(){
                                     cliente[search_ci].saldo-=deposito;
                                     cliente[search_ci_2].saldo+=deposito;
                                     cout<<"Su transferencia a "<<cliente[search_ci_2].nombre<<" ha sido realizado con exito"<<endl;
-                                    ofstream out_file("Operaciones.csv",ios_base::app);
+                                    ofstream out_file("../data/Operaciones.csv",ios_base::app);
                                     out_file<<cliente[search_ci].ci<<","<<cliente[search_ci].nombre<<","<<cliente[search_ci].tipo_de_cuenta<<","<<"transferencia"<<","<<cliente[search_ci_2].ci<<","<<cliente[search_ci_2].nombre<<","<<cliente[search_ci_2].tipo_de_cuenta<<","<<deposito<<endl;
                                     out_file.close();
                                     system("pause");
@@ -342,7 +342,7 @@ int main(){
             case 3:
                 cout<<"Bienvenido a la seccion de penalizacion de su cuenta, a continuacion se le nombrara las politicas del banco que en caso de incumplirse sera motivo de penalizacion.\n1)Ingresar montos en las operaciones iguales a 0 o menor.\n2)Realizar retiros cuyo monto exceda los 50.000$ en una sola operacion.\n3)Realizar transferencias entre clientes del mismo banco cuyo monto exceda los 100.000$ en una sola operacion.\nEn caso de recibir 3 penalizaciones, su cuenta sera suspendida hasta nuevo aviso.\nPor favor ingrese su numero de cedula para verificar el estado de suspension de su cuenta: "; cin>>search_ci;
                 system("cls");
-                for(int i=0; i<1000; i++){ //Mismo razonamiento que la seccion 1
+                for(int i=0; i<1000; i++){ 
                         if(search_ci==cliente[i].ci){
                             search_ci=i;
                             break;
@@ -374,7 +374,7 @@ int main(){
                     break;
         }
     }while(flag!=4);
-    ofstream write_file("clients.csv", ofstream::out);
+    ofstream write_file("../data/clients.csv", ofstream::out);
     for(int i=0; i<1000; i++){
         write_file<<cliente[i].ci<<","<<cliente[i].nombre<<","<<cliente[i].numero_de_cuenta<<","<<cliente[i].tipo_de_cuenta<<","<<cliente[i].saldo<<","<<cliente[i].suspension<<endl;
     }
