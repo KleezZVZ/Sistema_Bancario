@@ -85,3 +85,11 @@ string consulta_tipo_de_cuenta(string numero_de_cuenta){
     }
     return "-1";
 }
+int estado_de_suspension(string search_numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(search_numero_de_cuenta==cliente[i].numero_de_cuenta && cliente[i].suspension=="false"){
+            return cliente[i].numero_de_penalizaciones;
+        }
+    }
+    return -1;
+}

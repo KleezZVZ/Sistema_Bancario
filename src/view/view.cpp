@@ -14,6 +14,10 @@ void menu_principal(){
             menu_1();
             system("cls");
             break;
+            case 3:
+            menu_3();
+            system("cls");
+            break;
         }
     }while(flag!=4);
 }
@@ -85,4 +89,30 @@ void menu_1(){
             system("cls");
         }
     }while(flag!=3);
+}
+void menu_3(){
+    int verificacion, suspension;
+    string numero_de_cuenta, nombre;
+    cout<<"Bienvenido a la seccion de penalizacion de su cuenta, a continuacion se le nombrara las politicas del banco que en caso de incumplirse sera motivo de penalizacion.\n1)Ingresar montos en las operaciones iguales a 0 o menor.\n2)Realizar retiros cuyo monto exceda los 50.000$ en una sola operacion.\n3)Realizar transferencias entre clientes del mismo banco cuyo monto exceda los 100.000$ en una sola operacion.\nEn caso de recibir 3 penalizaciones, su cuenta sera suspendida hasta nuevo aviso.\nTiene que iniciar sesio para verificar su estado de suspension de la cuenta. ";
+    system("pause");
+    system("cls");
+    rewind(stdin);
+    cout<<"Por favor ingrese su nombre y apellido: "; getline(cin, nombre);
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su numero de cuenta: "; getline(cin, numero_de_cuenta);
+    system("cls");
+    rewind(stdin);
+    verificacion=inicio_sesion_1(nombre, numero_de_cuenta);
+    if(verificacion==1){
+        suspension=estado_de_suspension(numero_de_cuenta);
+        if(suspension==-1){
+            cout<<"Estimado cliente/a "<<nombre<<" su cuenta "<<numero_de_cuenta<<" esta en estado de suspension"<<endl;
+        }else{
+             cout<<"Estimado cliente/a "<<nombre<<" su cuenta "<<numero_de_cuenta<<" no se encuentra en estado de suspension.\nEstas son sus numeros de penalizaciones acumuladas: "<<suspension<<endl;
+        }
+    }else{
+        cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+    }
+    system("pause");
 }

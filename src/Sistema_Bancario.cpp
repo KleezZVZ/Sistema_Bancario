@@ -225,29 +225,6 @@ int main(){
                     }
                 }while(flag_2!=4);
             break;
-            case 3:
-                cout<<"Bienvenido a la seccion de penalizacion de su cuenta, a continuacion se le nombrara las politicas del banco que en caso de incumplirse sera motivo de penalizacion.\n1)Ingresar montos en las operaciones iguales a 0 o menor.\n2)Realizar retiros cuyo monto exceda los 50.000$ en una sola operacion.\n3)Realizar transferencias entre clientes del mismo banco cuyo monto exceda los 100.000$ en una sola operacion.\nEn caso de recibir 3 penalizaciones, su cuenta sera suspendida hasta nuevo aviso.\nPor favor ingrese su numero de cedula para verificar el estado de suspension de su cuenta: "; cin>>search_ci;
-                system("cls");
-                for(int i=0; i<1000; i++){ 
-                        if(search_ci==cliente[i].ci){
-                            search_ci=i;
-                            break;
-                        }else if(search_ci!=cliente[i].ci && i==999){
-                            cout<<"La cedula que ingreso no es correcta, por favor vuelva a intentarlo"<<endl;
-                            search_ci=2000;
-                            system("pause");
-                            system("cls");
-                        }
-                    }if(cliente[search_ci].suspension=="true" && search_ci!=2000){
-                        cout<<"Estimado cliente/a "<<cliente[search_ci].nombre<<" su cuenta "<<cliente[search_ci].numero_de_cuenta<<" "<<cliente[search_ci].tipo_de_cuenta<<" esta en estado de suspension"<<endl;
-                        system("pause");
-                        system("cls");
-                    }else if(cliente[search_ci].suspension=="false" && search_ci!=2000){
-                        cout<<"Estimado cliente/a "<<cliente[search_ci].nombre<<" su cuenta "<<cliente[search_ci].numero_de_cuenta<<" "<<cliente[search_ci].tipo_de_cuenta<<" no se encuentra en estado de suspension.\nEstas son la cantidad de penalizaciones que actual tiene: "<<cliente[search_ci].numero_de_penalizaciones<<endl;
-                        system("pause");
-                        system("cls");
-                    }
-                    break;
                 case 4:
                     cout<<"Gracias por su confianza, vuelva pronto!"<<endl;
                     system("pause");
