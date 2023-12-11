@@ -104,6 +104,10 @@ void menu_2(){
             menu_2_1();
             system("cls");
             break;
+            case 2:
+            menu_2_2();
+            system("cls");
+            break;
         }
     }while(flag!=4);
     
@@ -140,6 +144,43 @@ void menu_2_1(){
         }
     }else{
         cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+    }
+    system("pause");
+}
+void menu_2_2(){
+    int verificacion, suspension, retiro, verificacion_retiro;
+    string nombre, numero_de_cuenta;
+    cout<<"Bienvenido a la seccion de retiros.\nPrimero debe de iniciar sesion para realizar el retiro."<<endl;
+    system("pause");
+    system("cls");
+    rewind(stdin);
+    cout<<"Por favor ingrese su nombre y apellido: "; getline(cin, nombre);
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su numero de cuenta: "; getline(cin, numero_de_cuenta);
+    system("cls");
+    rewind(stdin);
+    verificacion=inicio_sesion_1(nombre, numero_de_cuenta);
+    if(verificacion==1){
+        suspension=estado_de_suspension(numero_de_cuenta);
+        if(suspension!=-1){
+            cout<<"Bienvenido/a "<<nombre<<".\nIngrese la cantidad a retirar: "; cin>>retiro;
+            system("cls");
+            verificacion_retiro=retiro_a_cuenta(numero_de_cuenta, retiro);
+            if(verificacion_retiro==-3){
+                cout<<"Am i a joke to you?"<<endl;
+            }else if(verificacion_retiro==-2){
+                cout<<"Debido a la gran cantidad de errores cometidos durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
+            }else if(verificacion_retiro==-1){
+                cout<<"No puede retirar una cantidad que exceda su saldo."<<endl;
+            }else{
+                cout<<"Su retiro ha sido realizado con exito!"<<endl;
+            }
+        }else{
+            cout<<"Estimado cliente, no puede realizar operaciones bancarias debido a que su cuenta esta suspendida."<<endl;
+        }
+    }else{
+         cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
     }
     system("pause");
 }

@@ -10,4 +10,5 @@
     std::string consulta_tipo_de_cuenta(std::string);
     int estado_de_suspension(std::string);
     int deposito_a_cuenta(std::string, int);
+    int retiro_a_cuenta(std::string, int);
 #endif
