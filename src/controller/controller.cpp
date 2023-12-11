@@ -122,7 +122,7 @@ int deposito_a_cuenta(string numero_de_cuenta, int deposito){
 }
 int retiro_a_cuenta(string numero_de_cuenta, int retiro){
     try{
-        if(retiro<=0){
+        if(retiro<=0 || retiro>50000){
             throw 1;
         }
         for(int i=0; i<nline; i++){
@@ -152,7 +152,7 @@ int retiro_a_cuenta(string numero_de_cuenta, int retiro){
 int transferencia_entre_clientes(string numero_de_cuenta, string numero_de_cuenta_2, int transferencia){
     int pos, pos_2;
     try{
-        if(transferencia<=0){
+        if(transferencia<=0 || transferencia>100000){
             throw 1;
         }
         for(int i=0; i<nline; i++){
@@ -182,4 +182,11 @@ int transferencia_entre_clientes(string numero_de_cuenta, string numero_de_cuent
         return -3;
     }
     return -4;
+}
+void subir_informacion(){
+    ofstream write_file("../data/clients.csv", ofstream::out);
+    for(int i=0; i<nline; i++){
+        write_file<<cliente[i].ci<<","<<cliente[i].nombre<<","<<cliente[i].numero_de_cuenta<<","<<cliente[i].tipo_de_cuenta<<","<<cliente[i].saldo<<","<<cliente[i].suspension<<endl;
+    }
+    write_file.close();
 }

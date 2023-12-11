@@ -22,6 +22,14 @@ void menu_principal(){
             menu_3();
             system("cls");
             break;
+            case 4:
+            cout<<"Muchas gracias por su confianza, vuelva pronto!"<<endl;
+            subir_informacion();
+            break;
+            default:
+            cout<<"Ingrese una opcion valida";
+            system("pause");
+            system("cls");
         }
     }while(flag!=4);
 }
