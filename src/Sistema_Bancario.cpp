@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include "view/view.h"
 using namespace std;
-/*
-int flag=0, flag_2=0, search_ci, search_ci_2, deposito=0, retiro=0, search_numero_de_cuenta_2, search_numero_de_cuenta_3, search_nombre_2; 
-string search_numero_de_cuenta, search_nombre, saldo[1000];*/
 int main(){
     menu_principal();
     system("pause");
@@ -17,56 +14,6 @@ int main(){
                     cout<<"Bienvenido al sistema de operaciones bancarias, a continuacion se le dira sus opciones:\n1)Deposito.\n2)Retiro.\n3)Transferencia entre usuarios de nuestro mismo banco.\n4)Volver al menu principal.\nElija su opcion: "; cin>>flag_2;
                     system("cls");
                     switch(flag_2){
-                        case 1:
-                        cout<<"Bienvenido a la seccion de depositos.\nPor favor ingrese el numero de su cedula de indentidad: "; cin>>search_ci;
-                        system("cls");
-                        rewind(stdin);
-                        cout<<"Ingrese el numero de cuenta de su tarjeta: "; getline(cin, search_numero_de_cuenta);
-                        system("cls");
-                        rewind(stdin);
-                        for(int i=0; i<1000; i++){ 
-                            if(search_ci==cliente[i].ci){
-                                search_ci=i;
-                                break;
-                            }
-                        }for(int i=0; i<1000; i++){ 
-                            if(search_numero_de_cuenta==cliente[i].numero_de_cuenta){
-                                search_numero_de_cuenta_2=i;
-                                break;
-                            }
-                        }if(search_numero_de_cuenta_2!=search_ci){
-                            cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
-                            system("pause");
-                            system("cls");
-                        }else if(cliente[search_ci].suspension=="true"){
-                            cout<<"Lo lamentamos "<<cliente[search_ci].nombre<<". pero su cuenta esta suspendida"<<endl;
-                            system("pause");
-                            system("cls");
-                        }else{
-                            cout<<"Bienvenido/a "<<cliente[search_ci].nombre<<".\nIngrese la cantidad a depositar: "; cin>>deposito;
-                            system("cls");
-                            if(deposito<=0){
-                                cout<<"I am a joke to you?"<<endl;
-                                cliente[search_ci].numero_de_penalizaciones++;
-                                system("pause");
-                                system("cls");
-                            }else{
-                                cliente[search_ci].saldo+=deposito;
-                                cout<<"Su deposito ha sido realizado con exito!"<<endl;
-                                ofstream out_file("../data/Operaciones.csv",ios_base::app);
-                                out_file<<cliente[search_ci].ci<<","<<cliente[search_ci].nombre<<","<<cliente[search_ci].tipo_de_cuenta<<","<<"deposito"<<","<<deposito<<endl;
-                                out_file.close();
-                                system("pause");
-                                system("cls");
-                            }
-                        }if(cliente[search_ci].numero_de_penalizaciones>=3){
-                            cout<<"Debido a la gran cantidad de errores cometidos durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
-                            cliente[search_ci].suspension="true";
-                            cliente[search_ci].numero_de_penalizaciones=0;
-                            system("pause");
-                            system("cls");
-                            }
-                        break;
                         case 2:
                         cout<<"Bienvenido a la seccion de retiro.\nPor favor ingrese el numero de su cedula de indentidad: "; cin>>search_ci;
                         system("cls");

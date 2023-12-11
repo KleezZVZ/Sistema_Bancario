@@ -93,3 +93,30 @@ int estado_de_suspension(string search_numero_de_cuenta){
     }
     return -1;
 }
+int deposito_a_cuenta(string numero_de_cuenta, int deposito){
+    try{
+        if(deposito<=0){
+            throw 1;
+        }
+        for(int i=0; i<nline; i++){
+            if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+                cliente[i].saldo+=deposito;
+                ofstream out_file("../data/Operaciones.csv",ios_base::app);
+                out_file<<cliente[i].ci<<","<<cliente[i].nombre<<","<<cliente[i].tipo_de_cuenta<<","<<"deposito"<<","<<deposito<<endl;
+                out_file.close();
+                return 1;
+            }
+        }
+    }catch(int n){
+        for(int i=0; i<nline; i++){
+            if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+                cliente[i].numero_de_penalizaciones+=n;
+            }if(cliente[i].numero_de_penalizaciones>=3){
+                cliente[i].suspension="true";
+                return -1;
+            }
+        }
+        return -2;
+    }
+    return -3;
+}

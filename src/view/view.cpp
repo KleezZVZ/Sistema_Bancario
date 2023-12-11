@@ -14,6 +14,10 @@ void menu_principal(){
             menu_1();
             system("cls");
             break;
+            case 2:
+            menu_2();
+            system("cls");
+            break;
             case 3:
             menu_3();
             system("cls");
@@ -89,6 +93,55 @@ void menu_1(){
             system("cls");
         }
     }while(flag!=3);
+}
+void menu_2(){
+    int flag;
+    do{
+        cout<<"Bienvenido al sistema de operaciones bancarias, a continuacion se le dira sus opciones:\n1)Deposito.\n2)Retiro.\n3)Transferencia entre usuarios de nuestro mismo banco.\n4)Volver al menu principal.\nElija su opcion: "; cin>>flag;
+        system("cls");
+        switch(flag){
+            case 1:
+            menu_2_1();
+            system("cls");
+            break;
+        }
+    }while(flag!=4);
+    
+}
+void menu_2_1(){
+    int verificacion, suspension, deposito, verificacion_deposito;
+    string nombre, numero_de_cuenta;
+    cout<<"Bienvenido a la seccion de depositos.\nPrimero debe de iniciar sesion para realizar el deposito."<<endl;
+    system("pause");
+    system("cls");
+    rewind(stdin);
+    cout<<"Por favor ingrese su nombre y apellido: "; getline(cin, nombre);
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su numero de cuenta: "; getline(cin, numero_de_cuenta);
+    system("cls");
+    rewind(stdin);
+    verificacion=inicio_sesion_1(nombre, numero_de_cuenta);
+    if(verificacion==1){
+        suspension=estado_de_suspension(numero_de_cuenta);
+        if(suspension!=-1){
+            cout<<"Bienvenido/a "<<nombre<<".\nIngrese la cantidad a depositar: "; cin>>deposito;
+            system("cls");
+            verificacion_deposito=deposito_a_cuenta(numero_de_cuenta, deposito);
+            if(verificacion_deposito==-2){
+                cout<<"Am i a joke to you?"<<endl;
+            }else if(verificacion_deposito==-1){
+                cout<<"Debido a la gran cantidad de errores cometidos durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
+            }else{
+                cout<<"Su deposito ha sido realizado con exito!"<<endl;
+            }
+        }else{
+            cout<<"Estimado cliente, no puede realizar operaciones bancarias debido a que su cuenta esta suspendida."<<endl;
+        }
+    }else{
+        cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+    }
+    system("pause");
 }
 void menu_3(){
     int verificacion, suspension;
