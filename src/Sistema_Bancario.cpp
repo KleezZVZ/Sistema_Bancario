@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <fstream>
+#include "view/view.h"
 using namespace std;
 struct Clientes{
     int ci, numero_de_penalizaciones, saldo;
