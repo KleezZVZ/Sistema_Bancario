@@ -12,6 +12,7 @@
 				"${fileDirname}\\controller\\*.cpp",
 				"${fileDirname}\\view\\*.cpp",
 				"${fileDirname}\\model\\*.cpp",
+				"${workspaceFolder}\\test\\*.cpp",
 				"-o",
 				"${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe"
 			],
