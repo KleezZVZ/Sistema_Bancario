@@ -186,7 +186,9 @@ int transferencia_entre_clientes(string numero_de_cuenta, string numero_de_cuent
 void subir_informacion(){
     ofstream write_file("../data/clients.csv", ofstream::out);
     for(int i=0; i<nline; i++){
-        write_file<<cliente[i].ci<<","<<cliente[i].nombre<<","<<cliente[i].numero_de_cuenta<<","<<cliente[i].tipo_de_cuenta<<","<<cliente[i].saldo<<","<<cliente[i].suspension<<endl;
+        if(!cliente[i].ci<=0){
+            write_file<<cliente[i].ci<<","<<cliente[i].nombre<<","<<cliente[i].numero_de_cuenta<<","<<cliente[i].tipo_de_cuenta<<","<<cliente[i].saldo<<","<<cliente[i].suspension<<endl;
+        }
     }
     write_file.close();
 }
@@ -206,4 +208,17 @@ string agregar_clientes(string nombre, int ci, string tipo_de_cuenta){
     write_file.close();
     nline++;
     return cliente[nline-1].numero_de_cuenta;
+}
+void eliminar_cliente(string numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(cliente[i].numero_de_cuenta==numero_de_cuenta){
+            cliente[i].ci=0;
+            cliente[i].nombre.clear();
+            cliente[i].numero_de_cuenta.clear();
+            cliente[i].tipo_de_cuenta.clear();
+            cliente[i].saldo=0;
+            cliente[i].numero_de_penalizaciones=0;
+            cliente[i].suspension.clear();
+        }
+    }
 }

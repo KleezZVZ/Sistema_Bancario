@@ -295,6 +295,17 @@ void menu_4(){
             menu_4_1();
             system("cls");
             break;
+            case 2:
+            menu_4_2();
+            system("cls");
+            break;
+            case 3:
+            system("cls");
+            break;
+            default:
+            cout<<"Ingrese una opcion valida"<<endl;
+            system("pause");
+            system("cls");
         }
     }while(flag!=3);
 }
@@ -315,5 +326,27 @@ void menu_4_1(){
     system("cls");
     numero_de_cuenta=agregar_clientes(nombre,ci,tipo_de_cuenta);
     cout<<"Su registro ha sido llevado con exito!, señor/a "<<nombre<<".\nLe invitamos a hacer su primer deposito, su numero de cuenta es: "<<numero_de_cuenta<<endl;
+    system("pause");
+}
+void menu_4_2(){
+    int verificacion, suspension;
+    string numero_de_cuenta, nombre;
+    cout<<"Lamentamos que haya decidido abandonar nuestro banco. Le pedimos que inicie sesion para poder eliminar su informacion de nuestro sistema"<<endl;
+    system("pause");
+    system("cls");
+    rewind(stdin);
+    cout<<"Por favor ingrese su nombre y apellido: "; getline(cin, nombre);
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su numero de cuenta: "; getline(cin, numero_de_cuenta);
+    system("cls");
+    rewind(stdin);
+    verificacion=inicio_sesion_1(nombre, numero_de_cuenta);
+    if(verificacion==1){
+        eliminar_cliente(numero_de_cuenta);
+        cout<<nombre<<", usted ha sido eliminado satisfactoriamente de nuestro sistema"<<endl;
+    }else{
+        cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+    }
     system("pause");
 }

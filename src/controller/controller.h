@@ -14,4 +14,5 @@
     int transferencia_entre_clientes(std::string, std::string, int);
     void subir_informacion();
     std::string agregar_clientes(std::string, int, std::string);
+    void eliminar_cliente(std::string);
 #endif
