@@ -1,45 +1,14 @@
-#include <iostream>
 #include <stdlib.h>
-#include <sstream>
-#include <string>
-#include <fstream>
 #include "view/view.h"
 using namespace std;
-struct Clientes{
-    int ci, numero_de_penalizaciones, saldo;
-    string nombre, tipo_de_cuenta, suspension, numero_de_cuenta;
-};
+/*
 int flag=0, flag_2=0, search_ci, search_ci_2, deposito=0, retiro=0, search_numero_de_cuenta_2, search_numero_de_cuenta_3, search_nombre_2; 
-string search_numero_de_cuenta, search_nombre, saldo[1000];
+string search_numero_de_cuenta, search_nombre, saldo[1000];*/
 int main(){
-    Clientes cliente[2000]; 
-    string line, word;
-    int count=0, nline=0;
-    ifstream in_file("../data/clients.csv", ifstream::in);
-    if(!in_file.is_open()){
-        cout<<"Archivo no encontrado";
-        return 0;
-    }
-    while(getline(in_file, line)){
-        stringstream str(line);
-        while(getline(str, word, ',')){
-            switch(count){
-                case 0: cliente[nline].ci=stoi(word);
-                case 1: cliente[nline].nombre=word;
-                case 2: cliente[nline].numero_de_cuenta=word;
-                case 3: cliente[nline].tipo_de_cuenta=word;
-                case 4: saldo[nline]=word;
-                case 5: cliente[nline].suspension=word;
-            }
-            count++;
-        }
-        count=0;
-        nline++;
-    }
-    in_file.close();
-    for(int i=0; i<1000; i++){
-        cliente[i].saldo=stoi(saldo[i]); //Hice muchas pruebas, y por mas que los datos se estaban guardando bien, no pude lograr guardar el saldo en la parte anterior debido a un error con el stoi
-    }do{
+    menu_principal();
+    system("pause");
+    /*
+    do{
         cout<<"Bienvenido a la plataforma online de nuestro banco, a continuacion se le dara las siguientes opciones:\n1)Consulta de cliente.\n2)Operaciones bancarias.\n3)Estado de suspension de su cuenta.\n4)Salir del programa.\nElija su opcion: "; cin>>flag;
         system("cls");
         switch(flag){
@@ -379,6 +348,6 @@ int main(){
     for(int i=0; i<1000; i++){
         write_file<<cliente[i].ci<<","<<cliente[i].nombre<<","<<cliente[i].numero_de_cuenta<<","<<cliente[i].tipo_de_cuenta<<","<<cliente[i].saldo<<","<<cliente[i].suspension<<endl;
     }
-    write_file.close();
+    write_file.close();*/
     return 0;
 }
