@@ -149,3 +149,37 @@ int retiro_a_cuenta(string numero_de_cuenta, int retiro){
     }
     return -4;
 }
+int transferencia_entre_clientes(string numero_de_cuenta, string numero_de_cuenta_2, int transferencia){
+    int pos, pos_2;
+    try{
+        if(transferencia<=0){
+            throw 1;
+        }
+        for(int i=0; i<nline; i++){
+            if(cliente[i].numero_de_cuenta==numero_de_cuenta && transferencia<=cliente[i].saldo){
+                pos=i;
+            }else if(cliente[i].numero_de_cuenta==numero_de_cuenta && transferencia>cliente[i].saldo){
+                return -1;
+            }if(cliente[i].numero_de_cuenta==numero_de_cuenta_2){
+                pos_2=i;
+            }
+        }
+        cliente[pos].saldo-=transferencia;
+        cliente[pos_2].saldo+=transferencia;
+        ofstream out_file("../data/Operaciones.csv",ios_base::app);
+        out_file<<cliente[pos].ci<<","<<cliente[pos].nombre<<","<<cliente[pos].tipo_de_cuenta<<","<<"transferencia"<<","<<cliente[pos_2].ci<<","<<cliente[pos_2].nombre<<","<<cliente[pos_2].tipo_de_cuenta<<","<<transferencia<<endl;
+        out_file.close();
+        return 1;
+    }catch(int n){
+        for(int i=0; i<nline; i++){
+            if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+                cliente[i].numero_de_penalizaciones+=n;
+            }if(cliente[i].numero_de_penalizaciones>=3){
+                cliente[i].suspension="true";
+                return -2;
+            }
+        }
+        return -3;
+    }
+    return -4;
+}

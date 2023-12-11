@@ -108,6 +108,16 @@ void menu_2(){
             menu_2_2();
             system("cls");
             break;
+            case 3:
+            menu_2_3();
+            system("cls");
+            break;
+            case 4:
+            system("cls");
+            break;
+            default:
+            cout<<"No ingreso una opcion valida"<<endl;
+            system("pause");
         }
     }while(flag!=4);
     
@@ -181,6 +191,59 @@ void menu_2_2(){
         }
     }else{
          cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+    }
+    system("pause");
+}
+void menu_2_3(){
+    int verificacion, verificacion_2, suspension, suspension_2, transferencia, verificacion_transferencia;
+    string nombre, numero_de_cuenta, nombre_2, numero_de_cuenta_2;
+    cout<<"Bienvenido a la seccion de transferencias entre clientes.\nPrimero debe de iniciar sesion para realizar la transferencia."<<endl;
+    system("pause");
+    system("cls");
+    rewind(stdin);
+    cout<<"Por favor ingrese su nombre y apellido: "; getline(cin, nombre);
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su numero de cuenta: "; getline(cin, numero_de_cuenta);
+    system("cls");
+    rewind(stdin);
+    verificacion=inicio_sesion_1(nombre, numero_de_cuenta);
+    if(verificacion==1){
+        suspension=estado_de_suspension(numero_de_cuenta);
+        if(suspension!=-1){
+            cout<<"Bienvenido/a "<<nombre<<".\nPor favor ingrese el nombre y apellido del cliente a transferir: "; getline(cin, nombre_2);
+            system("cls");
+            rewind(stdin);
+            cout<<"Ingrese el numero de cuenta del cliente a transferir: "; getline(cin, numero_de_cuenta_2);
+            system("cls");
+            rewind(stdin);
+            verificacion_2=inicio_sesion_1(nombre_2, numero_de_cuenta_2);
+            if(verificacion_2==1){
+                suspension_2=estado_de_suspension(numero_de_cuenta_2);
+                if(suspension_2!=-1){
+                    cout<<"Ingrese la cantidad a transferir a "<<nombre_2<<": "; cin>>transferencia;
+                    system("cls");
+                    verificacion_transferencia=transferencia_entre_clientes(numero_de_cuenta,numero_de_cuenta_2,transferencia);
+                    if(verificacion_transferencia==-3){
+                        cout<<"Am i a joke to you?"<<endl;
+                    }else if(verificacion_transferencia==-2){
+                        cout<<"Debido a la gran cantidad de errores cometidos durante sus operaciones, hemos decidido suspender su cuenta."<<endl;
+                    }else if(verificacion_transferencia==-1){
+                        cout<<"No puede transferir una cantidad que exceda su saldo."<<endl;
+                    }else{
+                        cout<<"Su transferencia ha sido realizado con exito!"<<endl;
+                    }
+                }else{
+                    cout<<"Lo lamentamos, pero la cuenta de "<<nombre_2<<" se encuentra suspendida"<<endl;
+                }
+            }else{
+                cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
+            }
+        }else{
+             cout<<"Estimado cliente, no puede realizar operaciones bancarias debido a que su cuenta esta suspendida."<<endl;
+        }
+    }else{
+        cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
     }
     system("pause");
 }
