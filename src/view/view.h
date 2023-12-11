@@ -7,4 +7,7 @@
     void menu_2_2();
     void menu_2_3();
     void menu_3();
+    void menu_4();
+    void menu_4_1();
+    void menu_4_2();
 #endif

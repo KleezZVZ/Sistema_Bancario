@@ -13,4 +13,5 @@
     int retiro_a_cuenta(std::string, int);
     int transferencia_entre_clientes(std::string, std::string, int);
     void subir_informacion();
+    std::string agregar_clientes(std::string, int, std::string);
 #endif

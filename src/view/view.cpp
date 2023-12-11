@@ -7,7 +7,7 @@ void menu_principal(){
     int flag;
     cargar_estructura();
     do{
-        cout<<"Bienvenido a la plataforma online de nuestro banco, a continuacion se le dara las siguientes opciones:\n1)Consulta de cliente.\n2)Operaciones bancarias.\n3)Estado de suspension de su cuenta.\n4)Salir del programa.\nElija su opcion: "; cin>>flag;
+        cout<<"Bienvenido a la plataforma online de nuestro banco, a continuacion se le dara las siguientes opciones:\n1)Consulta de cliente.\n2)Operaciones bancarias.\n3)Estado de suspension de su cuenta.\n4)Clientes.\n5)Salir del programa.\nElija su opcion: "; cin>>flag;
         system("cls");
         switch(flag){
             case 1:
@@ -23,6 +23,10 @@ void menu_principal(){
             system("cls");
             break;
             case 4:
+            menu_4();
+            system("cls");
+            break;
+            case 5:
             cout<<"Muchas gracias por su confianza, vuelva pronto!"<<endl;
             subir_informacion();
             break;
@@ -31,7 +35,7 @@ void menu_principal(){
             system("pause");
             system("cls");
         }
-    }while(flag!=4);
+    }while(flag!=5);
 }
 void menu_1(){
     int flag, verificacion, saldo, ci;
@@ -279,5 +283,37 @@ void menu_3(){
     }else{
         cout<<"Los datos ingresados no coinciden, por favor vuelva a intentar"<<endl;
     }
+    system("pause");
+}
+void menu_4(){
+    int flag;
+    do{
+        cout<<"Bienvenido/a a la seccion enfocado a los clientes, a continuacion se le dara sus opciones:\n1)Registrarse.\n2)Eliminar su registro.\n3)Volver al menu principal.\nElija su opcion: "; cin>>flag;
+        system("cls");
+        switch(flag){
+            case 1:
+            menu_4_1();
+            system("cls");
+            break;
+        }
+    }while(flag!=3);
+}
+void menu_4_1(){
+    int ci;
+    string nombre, tipo_de_cuenta, numero_de_cuenta;
+    cout<<"Nos alegra que quiera ser parte de nuestro banco. A continuacion, los requisitos que tiene que rellenar:\n1)Cedula de identidad.\n2)Nombre y apellido.\n3)Tipo de cuenta."<<endl;
+    system("pause");
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su nombre y apellido: "; getline(cin, nombre);
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese su cedula de identidad: "; cin>>ci;
+    system("cls");
+    rewind(stdin);
+    cout<<"Ingrese el tipo de cuenta que desea [debit][current]: "; getline(cin, tipo_de_cuenta);
+    system("cls");
+    numero_de_cuenta=agregar_clientes(nombre,ci,tipo_de_cuenta);
+    cout<<"Su registro ha sido llevado con exito!, señor/a "<<nombre<<".\nLe invitamos a hacer su primer deposito, su numero de cuenta es: "<<numero_de_cuenta<<endl;
     system("pause");
 }

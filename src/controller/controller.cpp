@@ -190,3 +190,20 @@ void subir_informacion(){
     }
     write_file.close();
 }
+string agregar_clientes(string nombre, int ci, string tipo_de_cuenta){
+    long long int aux;
+    cliente[nline].nombre=nombre;
+    cliente[nline].ci=ci;
+    cliente[nline].tipo_de_cuenta=tipo_de_cuenta;
+    cliente[nline].saldo=0;
+    cliente[nline].numero_de_penalizaciones=0;
+    cliente[nline].suspension="false";
+    aux=stoll(cliente[nline-1].numero_de_cuenta);
+    aux++;
+    cliente[nline].numero_de_cuenta=to_string(aux);
+    ofstream write_file("../data/clients.csv", ios_base::app);
+    write_file<<cliente[nline].ci<<","<<cliente[nline].nombre<<","<<cliente[nline].numero_de_cuenta<<","<<cliente[nline].tipo_de_cuenta<<","<<cliente[nline].saldo<<","<<cliente[nline].suspension<<endl;
+    write_file.close();
+    nline++;
+    return cliente[nline-1].numero_de_cuenta;
+}
