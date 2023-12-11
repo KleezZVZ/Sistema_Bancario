@@ -36,12 +36,52 @@ void cargar_estructura(){
     }
     delete[] saldo;
     saldo=nullptr;
+}
+int inicio_sesion_1(string search_nombre, string search_numero_de_cuenta){
     for(int i=0; i<nline; i++){
-        cout<<i+1<<"-"<<cliente[i].ci<<endl;
-        cout<<i+1<<"-"<<cliente[i].nombre<<endl;
-        cout<<i+1<<"-"<<cliente[i].numero_de_cuenta<<endl;
-        cout<<i+1<<"-"<<cliente[i].tipo_de_cuenta<<endl;
-        cout<<i+1<<"-"<<cliente[i].saldo<<endl;
-        cout<<i+1<<"-"<<cliente[i].suspension<<endl;
+        if(search_nombre==cliente[i].nombre && search_numero_de_cuenta==cliente[i].numero_de_cuenta){
+            return 1;
+        }
     }
+    return -1;
+}
+int inicio_sesion_2(int search_ci, string search_numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(search_ci==cliente[i].ci && search_numero_de_cuenta==cliente[i].numero_de_cuenta){
+            return 1;
+        }
+    }
+    return -1;
+}
+int consulta_saldo(string numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+            return cliente[i].saldo;
+        }
+    }
+    return -1;
+}
+int consulta_ci(string numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+            return cliente[i].ci;
+        }
+    }
+    return -1;
+}
+string consulta_nombre(string numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+            return cliente[i].nombre;
+        }
+    }
+    return "-1";
+}
+string consulta_tipo_de_cuenta(string numero_de_cuenta){
+    for(int i=0; i<nline; i++){
+        if(numero_de_cuenta==cliente[i].numero_de_cuenta){
+            return cliente[i].tipo_de_cuenta;
+        }
+    }
+    return "-1";
 }
